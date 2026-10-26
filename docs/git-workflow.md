@@ -20,17 +20,17 @@ To maintain verifiable delivery standards, checks that can be executed today on 
 | **Color Contrast Calculation** | `node -e "<WCAG script>"` | Calculated exact ratios (e.g., `#042F2E` on `#14B8A6` = 5.81:1) | **VERIFIED (Active)** |
 | **Gate 1: Typecheck** | `npm run typecheck` (`tsc --noEmit`) | Exited code 0, zero type errors (`strict: true`) | **VERIFIED (Active)** |
 | **Gate 2: Lint** | `npm run lint` (`eslint .`) | Exited code 0, zero ESLint errors | **VERIFIED (Active)** |
-| **Gate 6: Production Build** | `npm run build` (`next build`) | Exited code 0, static pages generated in 3.2s | **VERIFIED (Active)** |
+| **Gate 3: Content Validation** | `npm run content:check` | Exited code 0, all content validated via Zod | **VERIFIED (Active)** |
+| **Gate 4: Unit Testing** | `npm run test` | Exited code 0, 11 tests passed in node:test | **VERIFIED (Active)** |
+| **Gate 6: Production Build** | `npm run build` (`next build`) | Exited code 0, static pages generated | **VERIFIED (Active)** |
 
 ---
 
-### 1.2 Planned Quality Gates (Deferred to Phase 3 & 4)
-*These gates will be mapped to concrete npm scripts as learning content and test suites are developed.*
+### 1.2 Planned Quality Gates (Deferred to Phase 4 & 10)
+*These gates will be mapped to concrete npm scripts as Pyodide execution and axe-core accessibility suites are added.*
 
 | Gate Name | Intended npm Script | Target Command | Scope & Pass Criteria | Phase Activated |
 | :--- | :--- | :--- | :--- | :--- |
-| **Gate 3: Content Validation** | `npm run content:check` | `ts-node scripts/validate-content.ts` | Zod schema validation for all courses, modules, lessons, and challenges. | Phase 3 |
-| **Gate 4: Unit Testing** | `npm run test` | `vitest run` | Unit tests for XP ledger arithmetic, timezone streak math, and error mappers. | Phase 3 |
 | **Gate 5: Automated Accessibility** | `npm run test:a11y` | `vitest run --testNamePattern=a11y` | Automated `axe-core` analysis; zero critical WCAG 2.2 AA violations. | Phase 4 |
 
 ---

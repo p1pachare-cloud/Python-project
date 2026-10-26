@@ -1,0 +1,9 @@
+{
+  "id": "course.python-basics",
+  "slug": "python-basics",
+  "title": "Python Fundamentals",
+  "description": "Master core Python syntax, variables, conditionals, loops, and functions through hands-on practice.",
+  "modules": [
+    "01-first-steps"
+  ]
+}

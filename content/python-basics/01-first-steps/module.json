@@ -1,0 +1,15 @@
+{
+  "id": "module.python-basics.01-first-steps",
+  "slug": "01-first-steps",
+  "title": "First Steps in Python",
+  "description": "Get started with Python syntax, outputting text, working with variables, and doing basic math.",
+  "order": 1,
+  "lessons": [
+    "01-hello-world.lesson.json",
+    "02-variables-and-types.lesson.json",
+    "03-basic-arithmetic.lesson.json"
+  ],
+  "challenges": [
+    "challenges/sum-two-numbers.challenge.json"
+  ]
+}

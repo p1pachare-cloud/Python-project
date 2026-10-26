@@ -1,0 +1,61 @@
+{
+  "id": "py-basics.01-first-steps.02-variables-and-types",
+  "slug": "02-variables-and-types",
+  "title": "Variables and Data Types",
+  "status": "published",
+  "objectives": [
+    "Understand how to store data in variables",
+    "Distinguish between integers, floats, and strings in Python"
+  ],
+  "estimatedMinutes": 4,
+  "body": [
+    {
+      "kind": "markdown",
+      "content": "Variables are named containers used to store data in memory. In Python, you create a variable simply by giving it a name and assigning a value with the `=` operator."
+    },
+    {
+      "kind": "codeExample",
+      "language": "python",
+      "code": "player_name = \"Alex\"\nscore = 150\nspeed = 4.5\n\nprint(player_name)\nprint(score)",
+      "caption": "Variables hold strings, integers (whole numbers), and floats (decimals)."
+    },
+    {
+      "kind": "callout",
+      "type": "info",
+      "title": "No Type Declarations Needed",
+      "text": "Python is dynamically typed. You don't need to declare whether a variable is an int or string; Python figures it out from the value you assign."
+    },
+    {
+      "kind": "quiz",
+      "question": "Which of the following creates a variable named 'health' with value 100?",
+      "options": [
+        "var health == 100",
+        "int health = 100",
+        "health = 100",
+        "100 -> health"
+      ],
+      "answerIndex": 2,
+      "explanation": "Python variable assignment uses the variable name followed by a single equals sign and the value."
+    }
+  ],
+  "exercise": {
+    "instructions": "Create a variable named `score` and assign it the integer `100`. Then print `score` using `print(score)`.",
+    "starterCode": "# Create the score variable and print it\n",
+    "visibleTests": [
+      {
+        "kind": "stdout",
+        "expected": "100\n",
+        "compare": "trimmed",
+        "feedbackOnFail": "Make sure you set score = 100 and then print(score)."
+      }
+    ],
+    "hints": [
+      "Define the variable: score = 100",
+      "Print the variable without quotes around its name: print(score)"
+    ],
+    "xp": 20,
+    "minSeconds": 10
+  },
+  "prev": "01-hello-world",
+  "next": "03-basic-arithmetic"
+}

@@ -1,0 +1,60 @@
+{
+  "id": "py-basics.01-first-steps.03-basic-arithmetic",
+  "slug": "03-basic-arithmetic",
+  "title": "Basic Arithmetic & Math",
+  "status": "published",
+  "objectives": [
+    "Perform addition, subtraction, multiplication, and division in Python",
+    "Calculate values dynamically and store them in variables"
+  ],
+  "estimatedMinutes": 5,
+  "body": [
+    {
+      "kind": "markdown",
+      "content": "Python can perform calculations just like a calculator. The basic mathematical operators are `+` (addition), `-` (subtraction), `*` (multiplication), and `/` (division)."
+    },
+    {
+      "kind": "codeExample",
+      "language": "python",
+      "code": "items = 4\nprice_per_item = 25\ntotal = items * price_per_item\nprint(total)  # Outputs 100",
+      "caption": "Multiplying items by price per item produces total cost."
+    },
+    {
+      "kind": "callout",
+      "type": "tip",
+      "title": "Operator Precedence",
+      "text": "Multiplication and division are evaluated before addition and subtraction. Use parentheses `( )` to explicitly control the order of operations."
+    },
+    {
+      "kind": "quiz",
+      "question": "What is the result of 10 + 2 * 3 in Python?",
+      "options": [
+        "36",
+        "16",
+        "15",
+        "26"
+      ],
+      "answerIndex": 1,
+      "explanation": "Multiplication happens first (2 * 3 = 6), then addition (10 + 6 = 16)."
+    }
+  ],
+  "exercise": {
+    "instructions": "Given a rectangle with `width = 5` and `height = 8`, compute its area by multiplying `width * height`. Store the result in a variable named `area` and print `area`.",
+    "starterCode": "width = 5\nheight = 8\n# Compute area and print it\n",
+    "visibleTests": [
+      {
+        "kind": "stdout",
+        "expected": "40\n",
+        "compare": "trimmed",
+        "feedbackOnFail": "Expected 40. Did you multiply width by height and assign it to area?"
+      }
+    ],
+    "hints": [
+      "Use the * symbol for multiplication: area = width * height",
+      "Print the area variable: print(area)"
+    ],
+    "xp": 20,
+    "minSeconds": 10
+  },
+  "prev": "02-variables-and-types"
+}

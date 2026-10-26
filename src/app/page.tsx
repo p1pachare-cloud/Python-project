@@ -1,4 +1,5 @@
 import React from "react";
+import Link from "next/link";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -26,12 +27,16 @@ export default function LandingPage() {
             <Badge variant="mint" className="hidden sm:inline-flex">
               v0.1 Preview
             </Badge>
-            <Button variant="secondary" size="sm">
-              View Syllabus
-            </Button>
-            <Button variant="primary" size="sm">
-              Start Free
-            </Button>
+            <Link href="/courses/python-basics">
+              <Button variant="secondary" size="sm">
+                View Syllabus
+              </Button>
+            </Link>
+            <Link href="/courses/python-basics">
+              <Button variant="primary" size="sm">
+                Start Free
+              </Button>
+            </Link>
           </nav>
         </div>
       </header>
@@ -43,7 +48,7 @@ export default function LandingPage() {
           <div className="mx-auto max-w-4xl px-4 text-center sm:px-6 lg:px-8">
             <div className="mb-4 inline-flex items-center gap-2">
               <Badge variant="coral">
-                Phase 2 Foundation
+                Phase 3 Content Active
               </Badge>
               <span className="text-xs font-medium text-[var(--stone-600)]">
                 Zero server-side execution cost
@@ -59,12 +64,16 @@ export default function LandingPage() {
               Bite-sized guided lessons, instant in-browser execution with Pyodide, and deliberate challenge practice. No command-line setup, no subscription walls, and no passive video watching.
             </p>
             <div className="mt-8 flex flex-col items-center justify-center gap-4 sm:flex-row">
-              <Button variant="primary" size="lg" className="w-full sm:w-auto">
-                Start Learning Now (Free)
-              </Button>
-              <Button variant="secondary" size="lg" className="w-full sm:w-auto">
-                Explore Course 1 Syllabus
-              </Button>
+              <Link href="/courses/python-basics/01-first-steps/01-hello-world" className="w-full sm:w-auto">
+                <Button variant="primary" size="lg" className="w-full sm:w-auto">
+                  Start Lesson 1 (Free)
+                </Button>
+              </Link>
+              <Link href="/courses/python-basics" className="w-full sm:w-auto">
+                <Button variant="secondary" size="lg" className="w-full sm:w-auto">
+                  Explore Course 1 Syllabus
+                </Button>
+              </Link>
             </div>
             <p className="mt-3 text-xs text-[var(--stone-500)]">
               No credit card required. Works directly in modern web browsers.

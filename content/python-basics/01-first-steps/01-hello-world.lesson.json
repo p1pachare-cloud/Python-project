@@ -1,0 +1,60 @@
+{
+  "id": "py-basics.01-first-steps.01-hello-world",
+  "slug": "01-hello-world",
+  "title": "Hello, Python!",
+  "status": "published",
+  "objectives": [
+    "Learn how to display text using the print() function",
+    "Understand string literals and basic syntax rules"
+  ],
+  "estimatedMinutes": 3,
+  "body": [
+    {
+      "kind": "markdown",
+      "content": "Welcome to Python! In programming, the very first thing most learners do is make the computer display a message on the screen. In Python, we do this with the `print()` function."
+    },
+    {
+      "kind": "codeExample",
+      "language": "python",
+      "code": "print(\"Hello, PyQuest!\")",
+      "caption": "Running this code outputs: Hello, PyQuest!"
+    },
+    {
+      "kind": "callout",
+      "type": "tip",
+      "title": "Quotation Marks Matter",
+      "text": "Text in Python must be enclosed in single quotes ('...') or double quotes (\"...\"). These are called strings."
+    },
+    {
+      "kind": "quiz",
+      "question": "Which of the following correctly prints the word 'Welcome' to the terminal?",
+      "options": [
+        "display('Welcome')",
+        "print(\"Welcome\")",
+        "output(Welcome)",
+        "echo 'Welcome'"
+      ],
+      "answerIndex": 1,
+      "explanation": "Python uses the built-in print() function followed by parentheses and quoted text."
+    }
+  ],
+  "exercise": {
+    "instructions": "Write code to print the exact message `Hello, World!` to standard output.",
+    "starterCode": "# Write your code below\n",
+    "visibleTests": [
+      {
+        "kind": "stdout",
+        "expected": "Hello, World!\n",
+        "compare": "trimmed",
+        "feedbackOnFail": "Expected 'Hello, World!' but received different output. Check punctuation and spelling."
+      }
+    ],
+    "hints": [
+      "Use the print() function.",
+      "Put the text inside double quotes inside parentheses: print(\"Hello, World!\")"
+    ],
+    "xp": 20,
+    "minSeconds": 10
+  },
+  "next": "02-variables-and-types"
+}

@@ -1,0 +1,63 @@
+{
+  "id": "challenge.python-basics.sum-two-numbers",
+  "slug": "sum-two-numbers",
+  "title": "Sum of Two Numbers",
+  "difficulty": "easy",
+  "statement": "Write a function named `add_numbers(a, b)` that takes two numeric arguments, `a` and `b`, and returns their sum.\n\n### Examples\n- `add_numbers(3, 5)` returns `8`\n- `add_numbers(-2, 7)` returns `5`",
+  "examples": [
+    {
+      "input": "add_numbers(3, 5)",
+      "output": "8",
+      "explanation": "3 + 5 = 8"
+    },
+    {
+      "input": "add_numbers(-2, 7)",
+      "output": "5",
+      "explanation": "-2 + 7 = 5"
+    }
+  ],
+  "starterCode": "def add_numbers(a, b):\n    # Return the sum of a and b\n    pass\n",
+  "visibleTests": [
+    {
+      "kind": "call",
+      "fn": "add_numbers",
+      "args": [3, 5],
+      "expected": 8,
+      "feedbackOnFail": "add_numbers(3, 5) should return 8"
+    },
+    {
+      "kind": "call",
+      "fn": "add_numbers",
+      "args": [10, 20],
+      "expected": 30,
+      "feedbackOnFail": "add_numbers(10, 20) should return 30"
+    }
+  ],
+  "hints": [
+    "A Python function uses the `def` keyword followed by the function name and parameters in parentheses.",
+    "Use the `return` statement to send back the result of adding `a` and `b`: `return a + b`"
+  ],
+  "xp": 30,
+  "tags": [
+    "functions",
+    "math",
+    "basics"
+  ],
+  "additionalChecks": [
+    {
+      "kind": "call",
+      "fn": "add_numbers",
+      "args": [-4, -6],
+      "expected": -10,
+      "feedbackOnFail": "Failed negative numbers check: add_numbers(-4, -6) should return -10"
+    },
+    {
+      "kind": "call",
+      "fn": "add_numbers",
+      "args": [0, 0],
+      "expected": 0,
+      "feedbackOnFail": "Failed zero input check: add_numbers(0, 0) should return 0"
+    }
+  ],
+  "referenceSolution": "def add_numbers(a, b):\n    return a + b\n"
+}
