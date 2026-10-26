@@ -9,8 +9,8 @@
 
 To maintain verifiable delivery standards, checks that can be executed today on the host toolchain are strictly distinguished from planned application quality gates that depend on the Phase 2 application scaffold.
 
-### 1.1 Currently Executable Host Environment Checks
-*These checks have been run and verified on the local host machine during Phase 0 inspection:*
+### 1.1 Currently Executable Quality Gates (Active Now)
+*These checks have been run and verified on the local host machine during Phase 0 and Phase 2:*
 
 | Tool / Check | Command Executed | Result / Output | Verification Status |
 | :--- | :--- | :--- | :--- |
@@ -18,20 +18,20 @@ To maintain verifiable delivery standards, checks that can be executed today on 
 | **Package Manager** | `npm -v` | `11.13.0` | **VERIFIED (Active)** |
 | **Version Control** | `git --version` | `git version 2.53.0.windows.1` | **VERIFIED (Active)** |
 | **Color Contrast Calculation** | `node -e "<WCAG script>"` | Calculated exact ratios (e.g., `#042F2E` on `#14B8A6` = 5.81:1) | **VERIFIED (Active)** |
+| **Gate 1: Typecheck** | `npm run typecheck` (`tsc --noEmit`) | Exited code 0, zero type errors (`strict: true`) | **VERIFIED (Active)** |
+| **Gate 2: Lint** | `npm run lint` (`eslint .`) | Exited code 0, zero ESLint errors | **VERIFIED (Active)** |
+| **Gate 6: Production Build** | `npm run build` (`next build`) | Exited code 0, static pages generated in 3.2s | **VERIFIED (Active)** |
 
 ---
 
-### 1.2 Planned Application Quality Gates (Deferred to Phase 2 Scaffolding)
-*These gates will be mapped to concrete npm scripts once `package.json` and tool configurations exist in Phase 2. They cannot be executed prior to scaffolding.*
+### 1.2 Planned Quality Gates (Deferred to Phase 3 & 4)
+*These gates will be mapped to concrete npm scripts as learning content and test suites are developed.*
 
 | Gate Name | Intended npm Script | Target Command | Scope & Pass Criteria | Phase Activated |
 | :--- | :--- | :--- | :--- | :--- |
-| **Gate 1: Typecheck** | `npm run typecheck` | `tsc --noEmit` | Strict TypeScript mode; zero type errors; no untyped `any`. | Phase 2 |
-| **Gate 2: Lint** | `npm run lint` | `eslint .` | Next.js and React best practices; zero lint errors. | Phase 2 |
 | **Gate 3: Content Validation** | `npm run content:check` | `ts-node scripts/validate-content.ts` | Zod schema validation for all courses, modules, lessons, and challenges. | Phase 3 |
 | **Gate 4: Unit Testing** | `npm run test` | `vitest run` | Unit tests for XP ledger arithmetic, timezone streak math, and error mappers. | Phase 3 |
 | **Gate 5: Automated Accessibility** | `npm run test:a11y` | `vitest run --testNamePattern=a11y` | Automated `axe-core` analysis; zero critical WCAG 2.2 AA violations. | Phase 4 |
-| **Gate 6: Production Build** | `npm run build` | `next build` | Production bundle compilation; checks for bundle size and static route generation. | Phase 2 |
 
 ---
 

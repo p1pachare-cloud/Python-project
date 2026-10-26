@@ -14,6 +14,7 @@ node_modules/
 out/
 build/
 dist/
+*.tsbuildinfo
 
 # Environment Files (CRITICAL: Never commit secrets or credentials)
 .env

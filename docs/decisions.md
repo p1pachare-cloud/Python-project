@@ -78,7 +78,17 @@ All architecture decision records in this project are subject to lifecycle manag
 
 ---
 
-## 3. Decisions Register (D1 – D16)
+### ADR-004: Package Manager Selection
+- **Status:** ACCEPTED
+- **Date:** 2026-10-26
+- **Context:** Phase 2 evaluated package managers (`npm`, `pnpm`, `yarn`, `bun`) for local developer onboarding, lockfile determinism, and CI pipeline support.
+- **Decision:** Select `npm` (version 11.x paired with Node.js v24.x) as the sole package manager, committing `package-lock.json` to version control.
+- **Rationale:** `npm` is installed out-of-the-box with Node.js, eliminating the need for developers or CI environments to bootstrap secondary package management binaries. Next.js 16.4.3 and Turbopack resolve cleanly via `npm` with 0 vulnerabilities and 3.2s production compilation.
+- **Consequences:** All contributors and agents must use `npm` (`npm install`, `npm run <script>`). Lockfile format is `package-lock.json`.
+
+---
+
+## 3. Decisions Register (D1 – D17)
 
 | ID | Topic | Status | Decision Summary / Current Baseline | Target Phase |
 | :--- | :--- | :--- | :--- | :--- |
@@ -98,6 +108,7 @@ All architecture decision records in this project are subject to lifecycle manag
 | **D14** | Processor Data Retention Rules | **PROPOSED** | User account data: until deletion (12-month inactivity notice); Security logs: 30 days; Backups: 30 days. | Phase 11 |
 | **D15** | Analytics Vendor at Launch | **ACCEPTED** | Zero third-party analytics SDKs or behavioral trackers. Essential session cookies only. | Phase 2 |
 | **D16** | Error Monitoring Strategy | **PROPOSED** | Server logs enabled; client error reporting off at launch, optional Sentry free tier evaluated at Phase 11. | Phase 11 |
+| **D17** | Package Manager Standard | **ACCEPTED** | `npm` (v11.x) with committed `package-lock.json`. Evaluated during Phase 2 scaffolding. | Phase 2 |
 
 ---
 

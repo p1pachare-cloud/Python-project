@@ -1,0 +1,96 @@
+/**
+ * PyQuest Design System Tokens
+ * Source of truth: docs/design-tokens.md
+ * WCAG 2.2 AA Verified
+ */
+
+:root {
+  /* Brand Primary: Mint Family */
+  --mint-50: #F0FDFA;
+  --mint-100: #CCFBF1;
+  --mint-200: #99F6E4;
+  --mint-300: #5EEAD4;
+  --mint-400: #2DD4BF;
+  --mint-500: #14B8A6; /* Primary brand */
+  --mint-600: #0D9488;
+  --mint-700: #0F766E;
+  --mint-800: #115E59;
+  --mint-900: #134E4A;
+  --mint-950: #042F2E; /* Dark slate ink - Verified 5.81:1 on #14B8A6 */
+
+  /* Brand Accent: Coral Family */
+  --coral-50: #FFF1F0;
+  --coral-100: #FFE4E1;
+  --coral-200: #FFC9C4;
+  --coral-300: #FFA59E;
+  --coral-400: #FF887D;
+  --coral-500: #FF6B5E; /* Accent brand */
+  --coral-600: #E65043;
+  --coral-700: #C73B2E;
+  --coral-800: #A32E23;
+  --coral-900: #7F241C;
+  --coral-950: #4C0519; /* Deep maroon ink - Verified 5.60:1 on #FF6B5E */
+
+  /* Neutrals: Warm Stone */
+  --stone-50: #FAFAF9; /* Canvas background */
+  --stone-100: #F5F5F4; /* Surface subtle */
+  --stone-200: #E7E5E4; /* Borders & dividers */
+  --stone-300: #D6D3D1;
+  --stone-400: #A8A29E;
+  --stone-500: #78716C; /* Muted text (4.59:1 on canvas) */
+  --stone-600: #57534E; /* Secondary text (7.30:1 on canvas) */
+  --stone-700: #44403C;
+  --stone-800: #292524;
+  --stone-900: #1C1917; /* Primary text (16.74:1 on canvas) */
+  --stone-950: #0C0A09;
+
+  /* Semantic Feedback (All verified >= 4.5:1 on stone-50 canvas) */
+  --semantic-success: #15803D; /* 4.80:1 */
+  --semantic-error: #BE123C;   /* 6.02:1 */
+  --semantic-warning: #B45309; /* 4.81:1 */
+  --semantic-info: #0F766E;    /* 5.24:1 */
+
+  /* Dark Editor Canvas Baseline */
+  --editor-bg: #0F172A;
+  --editor-text: #F8FAFC;     /* 17.06:1 */
+  --editor-keyword: #5EEAD4;  /* 12.65:1 */
+  --editor-string: #FDE68A;   /* 15.22:1 */
+  --editor-comment: #94A3B8;  /* 6.67:1 */
+
+  /* Spacing Scale (4px base) */
+  --space-1: 0.25rem;  /* 4px */
+  --space-2: 0.5rem;   /* 8px */
+  --space-3: 0.75rem;  /* 12px */
+  --space-4: 1rem;     /* 16px */
+  --space-5: 1.25rem;  /* 20px */
+  --space-6: 1.5rem;   /* 24px */
+  --space-8: 2rem;     /* 32px */
+  --space-10: 2.5rem;  /* 40px */
+  --space-12: 3rem;    /* 48px */
+  --space-16: 4rem;    /* 64px */
+
+  /* Radii */
+  --radius-sm: 4px;
+  --radius-md: 6px;
+  --radius-lg: 10px;
+  --radius-full: 9999px;
+
+  /* Shadows (low elevation only - glassmorphism & heavy shadows prohibited) */
+  --shadow-none: none;
+  --shadow-subtle: 0 1px 3px 0 rgba(0, 0, 0, 0.05), 0 1px 2px -1px rgba(0, 0, 0, 0.05);
+  --shadow-card: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
+  --shadow-modal: 0 10px 15px -3px rgba(0, 0, 0, 0.08), 0 4px 6px -4px rgba(0, 0, 0, 0.05);
+
+  /* Motion Timing */
+  --motion-fast: 120ms;
+  --motion-normal: 180ms;
+  --motion-reward: 250ms;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --motion-fast: 0ms;
+    --motion-normal: 0ms;
+    --motion-reward: 0ms;
+  }
+}
