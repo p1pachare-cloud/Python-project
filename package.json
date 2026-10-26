@@ -9,9 +9,10 @@
     "lint": "eslint .",
     "typecheck": "tsc --noEmit",
     "content:check": "node --no-warnings --experimental-strip-types scripts/validate-content.ts",
-    "test": "node --no-warnings --test --experimental-strip-types tests/content-validation.test.ts"
+    "test": "node --no-warnings --test --experimental-strip-types tests/content-validation.test.ts tests/execution-runner.test.ts"
   },
   "dependencies": {
+    "@monaco-editor/react": "^4.7.0",
     "next": "16.4.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",
@@ -26,5 +27,8 @@
     "eslint-config-next": "16.4.3",
     "tailwindcss": "^4",
     "typescript": "^5"
+  },
+  "overrides": {
+    "dompurify": "^3.4.17"
   }
 }

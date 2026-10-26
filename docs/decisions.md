@@ -95,8 +95,8 @@ All architecture decision records in this project are subject to lifecycle manag
 | **D1** | Under-18 Account Model & Consent | **PENDING** | Undecided. Evaluating Model A (Local-Only), Model B (Consented Accounts), and Model C (Staged Guest-First). Requires qualified legal review. | Phase 6 |
 | **D2** | Tier C Trusted Grading Provider | **DEFERRED** | Post-launch. No server judge in MVP. Leaderboards blocked until D2 resolution. | Post-MVP |
 | **D3** | Vercel Hobby Terms & Commercial Use | **ACCEPTED** | Non-commercial personal educational baseline permitted on Hobby. Budget Vercel Pro if monetized or sponsored. | Pre-Deploy |
-| **D4** | Pyodide Delivery (CDN vs. Self-Hosted) | **PROPOSED** | Pin Pyodide version. Delivery mechanism (public CDN vs. self-hosted) decided after Phase 4 loading spike. | Phase 4 |
-| **D5** | Code Editor Responsive Breakpoint | **ACCEPTED** | Monaco Editor on screens ≥1024px; accessible monospace `<textarea>` on screens <1024px and by user preference. | Phase 4 |
+| **D4** | Pyodide Delivery (CDN vs. Self-Hosted) | **ACCEPTED** | Pinned Pyodide v0.26.4 served from jsDelivr CDN inside dedicated Web Worker (`public/workers/pyodide.worker.js`). | Phase 4 |
+| **D5** | Code Editor Responsive Breakpoint | **ACCEPTED** | Monaco Editor on screens ≥1024px; accessible monospace `<textarea>` on screens <1024px and via user toggle. | Phase 4 |
 | **D6** | Product Name & Domain | **PROPOSED** | "PyQuest" working placeholder. Final domain and branding to be finalized before public release. | Phase 2 |
 | **D7** | Launch Course Scope | **ACCEPTED** | 1 beginner course: ~12 lessons, 8 challenges. Single authoring pipeline. | Phase 3 |
 | **D8** | Mobile Testing Reference Device | **PROPOSED** | Android physical device in the ₹10,000–₹15,000 class (Slow 4G profile). | Phase 4 |

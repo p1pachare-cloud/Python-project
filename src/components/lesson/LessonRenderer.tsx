@@ -6,6 +6,7 @@ import { type Lesson, type Block } from "@/lib/content/schemas";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CodeEditor } from "@/components/editor/CodeEditor";
 
 export interface LessonRendererProps {
   lesson: Lesson;
@@ -20,6 +21,7 @@ export function LessonRenderer({
 }: LessonRendererProps) {
   // Client state for hints
   const [revealedHints, setRevealedHints] = useState<number>(0);
+  const [exercisePassed, setExercisePassed] = useState<boolean>(false);
 
   // Client state for quizzes (blockIndex -> selectedOptionIndex)
   const [quizAnswers, setQuizAnswers] = useState<Record<number, number>>({});
@@ -232,39 +234,42 @@ export function LessonRenderer({
             <p>{lesson.exercise.instructions}</p>
           </div>
 
-          {/* Starter Code Preview */}
-          <div className="mb-5">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--stone-600)] block mb-1.5">
-              Starter Code
-            </span>
-            <div className="rounded-[var(--radius-md)] bg-[var(--editor-bg)] p-3.5 font-mono text-sm text-[var(--editor-text)] overflow-x-auto">
-              <pre>
-                <code>{lesson.exercise.starterCode}</code>
-              </pre>
-            </div>
+          {/* Interactive Code Editor (Phase 4 Pyodide + Monaco) */}
+          <div className="mb-6">
+            <CodeEditor
+              initialCode={lesson.exercise.starterCode}
+              tests={lesson.exercise.visibleTests}
+              title={`Exercise: ${lesson.title}`}
+              onRunComplete={(allPassed) => {
+                setExercisePassed(allPassed);
+              }}
+            />
           </div>
 
-          {/* Visible Tests List */}
-          <div className="mb-5">
-            <span className="text-xs font-bold uppercase tracking-wider text-[var(--stone-600)] block mb-1.5">
-              Visible Test Cases ({lesson.exercise.visibleTests.length})
-            </span>
-            <div className="space-y-2">
-              {lesson.exercise.visibleTests.map((t, i) => (
-                <div
-                  key={i}
-                  className="flex items-center justify-between rounded-[var(--radius-sm)] border border-[var(--stone-200)] bg-[var(--stone-100)] p-2.5 text-xs font-mono"
-                >
-                  <span className="text-[var(--stone-700)]">
-                    {t.kind === "stdout" ? "Output check" : `Call ${t.fn}`}
-                  </span>
-                  <span className="font-semibold text-[var(--stone-900)]">
-                    Expected: {t.kind === "stdout" ? JSON.stringify(t.expected.trim()) : JSON.stringify(t.expected)}
-                  </span>
+          {/* Practice Check Completion Banner */}
+          {exercisePassed && (
+            <div
+              className="mb-6 rounded-[var(--radius-md)] border border-emerald-300 bg-emerald-50 p-4 text-emerald-950 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-[var(--shadow-subtle)]"
+              aria-live="polite"
+            >
+              <div className="flex items-center gap-3">
+                <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-emerald-200 text-lg">
+                  ✓
+                </span>
+                <div>
+                  <h3 className="font-bold text-sm text-emerald-950">
+                    Practice Check Passed!
+                  </h3>
+                  <p className="text-xs text-emerald-800">
+                    All visible tests passed inside your browser Web Worker (Tier A).
+                  </p>
                 </div>
-              ))}
+              </div>
+              <Badge variant="mint">
+                +{lesson.exercise.xp} XP Self-Reported
+              </Badge>
             </div>
-          </div>
+          )}
 
           {/* Hints Section */}
           {lesson.exercise.hints.length > 0 && (
@@ -300,9 +305,9 @@ export function LessonRenderer({
             </div>
           )}
 
-          {/* Phase Notice */}
+          {/* Execution Environment Notice */}
           <div className="mt-5 rounded-[var(--radius-sm)] bg-[var(--stone-100)] p-3 text-center text-xs text-[var(--stone-600)] border border-[var(--stone-200)]">
-            <span className="font-semibold text-[var(--stone-800)]">Phase 3 Notice:</span> The interactive Pyodide in-browser Web Worker and Monaco editor will be integrated into this panel during Phase 4.
+            <span className="font-semibold text-[var(--stone-800)]">Browser Execution Note:</span> Python code executes directly in your browser tab via a Web Worker (Tier A, Untrusted). No learner code is sent to or executed on the server.
           </div>
         </section>
       )}
