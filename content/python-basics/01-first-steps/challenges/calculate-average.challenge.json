@@ -1,0 +1,80 @@
+{
+  "id": "challenge.python-basics.calculate-average",
+  "slug": "calculate-average",
+  "title": "Calculate List Average",
+  "difficulty": "medium",
+  "statement": "Write a function named `calculate_average(numbers)` that takes a non-empty list of numbers and returns their arithmetic mean (average) as a floating-point number.\n\nThe arithmetic mean is the sum of all elements divided by the total count of elements:\n$$\\text{Average} = \\frac{\\sum \\text{numbers}}{N}$$\n\n### Examples\n- `calculate_average([10, 20, 30])` returns `20.0`\n- `calculate_average([1, 2, 3, 4])` returns `2.5`\n- `calculate_average([5])` returns `5.0`",
+  "examples": [
+    {
+      "input": "calculate_average([10, 20, 30])",
+      "output": "20.0",
+      "explanation": "(10 + 20 + 30) / 3 = 60 / 3 = 20.0"
+    },
+    {
+      "input": "calculate_average([1, 2, 3, 4])",
+      "output": "2.5",
+      "explanation": "(1 + 2 + 3 + 4) / 4 = 10 / 4 = 2.5"
+    }
+  ],
+  "starterCode": "def calculate_average(numbers):\n    # Return the arithmetic average of the numbers list\n    pass\n",
+  "visibleTests": [
+    {
+      "kind": "call",
+      "fn": "calculate_average",
+      "args": [[10, 20, 30]],
+      "expected": 20.0,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "calculate_average([10, 20, 30]) should return 20.0"
+    },
+    {
+      "kind": "call",
+      "fn": "calculate_average",
+      "args": [[1, 2, 3, 4]],
+      "expected": 2.5,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "calculate_average([1, 2, 3, 4]) should return 2.5"
+    }
+  ],
+  "hints": [
+    "Compute the sum of all numbers using a loop or Python's `sum()` function.",
+    "Get the count of numbers using `len(numbers)`. Then divide the total sum by the count using `/`."
+  ],
+  "xp": 60,
+  "tags": [
+    "lists",
+    "math",
+    "floats"
+  ],
+  "additionalChecks": [
+    {
+      "kind": "call",
+      "fn": "calculate_average",
+      "args": [[5]],
+      "expected": 5.0,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "Single-element list [5] should return 5.0"
+    },
+    {
+      "kind": "call",
+      "fn": "calculate_average",
+      "args": [[-10, 10, -5, 5]],
+      "expected": 0.0,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "Numbers summing to 0 should return 0.0"
+    },
+    {
+      "kind": "call",
+      "fn": "calculate_average",
+      "args": [[2, 4, 4, 4, 5, 5, 7, 9]],
+      "expected": 5.0,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "Average of [2, 4, 4, 4, 5, 5, 7, 9] should be 5.0"
+    }
+  ],
+  "referenceSolution": "def calculate_average(numbers):\n    return sum(numbers) / len(numbers)\n"
+}

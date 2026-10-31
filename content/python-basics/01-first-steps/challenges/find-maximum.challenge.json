@@ -1,0 +1,70 @@
+{
+  "id": "challenge.python-basics.find-maximum",
+  "slug": "find-maximum",
+  "title": "Find the Maximum Number",
+  "difficulty": "medium",
+  "statement": "Write a function named `find_max(numbers)` that takes a non-empty list of numbers and returns the largest value.\n\nPractice algorithmic thinking by implementing this with a loop instead of calling Python's built-in `max()` function.\n\n### Examples\n- `find_max([3, 7, 2, 9, 5])` returns `9`\n- `find_max([-10, -3, -50, -2])` returns `-2`\n- `find_max([42])` returns `42`",
+  "examples": [
+    {
+      "input": "find_max([3, 7, 2, 9, 5])",
+      "output": "9",
+      "explanation": "9 is the largest element in the list."
+    },
+    {
+      "input": "find_max([-10, -3, -50, -2])",
+      "output": "-2",
+      "explanation": "In an all-negative list, -2 is closest to zero and therefore the greatest."
+    }
+  ],
+  "starterCode": "def find_max(numbers):\n    # Return the largest number in the list\n    pass\n",
+  "visibleTests": [
+    {
+      "kind": "call",
+      "fn": "find_max",
+      "args": [[3, 7, 2, 9, 5]],
+      "expected": 9,
+      "feedbackOnFail": "find_max([3, 7, 2, 9, 5]) should return 9"
+    },
+    {
+      "kind": "call",
+      "fn": "find_max",
+      "args": [[-10, -3, -50, -2]],
+      "expected": -2,
+      "feedbackOnFail": "find_max with all negative numbers should return -2"
+    }
+  ],
+  "hints": [
+    "Initialize a tracking variable with the first element of the list (`numbers[0]`), not 0. Initializing with 0 fails if all numbers are negative!",
+    "Loop over each number in `numbers`: if the current number is greater than your largest seen so far, update your tracking variable."
+  ],
+  "xp": 60,
+  "tags": [
+    "lists",
+    "loops",
+    "algorithms"
+  ],
+  "additionalChecks": [
+    {
+      "kind": "call",
+      "fn": "find_max",
+      "args": [[42]],
+      "expected": 42,
+      "feedbackOnFail": "A single-element list [42] should return 42"
+    },
+    {
+      "kind": "call",
+      "fn": "find_max",
+      "args": [[100, 100, 50]],
+      "expected": 100,
+      "feedbackOnFail": "Lists with duplicate maximum values should return 100"
+    },
+    {
+      "kind": "call",
+      "fn": "find_max",
+      "args": [[0, -5, 0, -20]],
+      "expected": 0,
+      "feedbackOnFail": "find_max([0, -5, 0, -20]) should return 0"
+    }
+  ],
+  "referenceSolution": "def find_max(numbers):\n    largest = numbers[0]\n    for num in numbers:\n        if num > largest:\n            largest = num\n    return largest\n"
+}

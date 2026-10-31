@@ -143,11 +143,11 @@ describe("Content Loader Functions", () => {
     assert.equal(pythonBasics.title, "Python Fundamentals");
   });
 
-  test("loads 01-first-steps module with 3 lessons and 1 challenge", () => {
+  test("loads 01-first-steps module with 3 lessons and 8 challenges", () => {
     const mod = getModule("python-basics", "01-first-steps");
     assert.equal(mod.title, "First Steps in Python");
     assert.equal(mod.lessons.length, 3);
-    assert.equal(mod.challenges?.length, 1);
+    assert.equal(mod.challenges?.length, 8);
   });
 
   test("loads individual lesson correctly", () => {
@@ -186,11 +186,25 @@ describe("Content Loader Functions", () => {
     assert.equal(course.title, "Python Fundamentals");
   });
 
-  test("loads individual challenge correctly", () => {
-    const challengeData = getChallenge("sum-two-numbers");
-    assert.ok(challengeData);
-    assert.equal(challengeData.challenge.title, "Sum of Two Numbers");
-    assert.equal(challengeData.challenge.difficulty, "easy");
-    assert.equal(challengeData.challenge.xp, 30);
+  test("loads individual challenges correctly", () => {
+    const slugs = [
+      "sum-two-numbers",
+      "celsius-to-fahrenheit",
+      "is-even",
+      "reverse-string",
+      "count-vowels",
+      "find-maximum",
+      "calculate-average",
+      "fizz-buzz-item",
+    ];
+
+    for (const slug of slugs) {
+      const data = getChallenge(slug);
+      assert.ok(data, `Challenge '${slug}' should be discoverable by loader`);
+      assert.ok(data.challenge.title.length > 0);
+      assert.ok(data.challenge.referenceSolution && data.challenge.referenceSolution.length > 0);
+      assert.ok(data.challenge.visibleTests.length >= 2);
+      assert.ok(data.challenge.additionalChecks.length >= 2);
+    }
   });
 });

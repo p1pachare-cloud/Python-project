@@ -1,0 +1,70 @@
+{
+  "id": "challenge.python-basics.reverse-string",
+  "slug": "reverse-string",
+  "title": "Reverse a String",
+  "difficulty": "easy",
+  "statement": "Write a function named `reverse_string(text)` that takes a string `text` and returns a new string containing all characters in reverse order.\n\n### Examples\n- `reverse_string(\"hello\")` returns `\"olleh\"`\n- `reverse_string(\"Python\")` returns `\"nohtyP\"`\n- `reverse_string(\"\")` returns `\"\"`",
+  "examples": [
+    {
+      "input": "reverse_string(\"hello\")",
+      "output": "\"olleh\"",
+      "explanation": "Characters reversed from end to start: 'o', 'l', 'l', 'e', 'h'"
+    },
+    {
+      "input": "reverse_string(\"Python\")",
+      "output": "\"nohtyP\"",
+      "explanation": "Case is preserved: 'P' moves to the end and 'n' moves to the front."
+    }
+  ],
+  "starterCode": "def reverse_string(text):\n    # Return text with characters reversed\n    pass\n",
+  "visibleTests": [
+    {
+      "kind": "call",
+      "fn": "reverse_string",
+      "args": ["hello"],
+      "expected": "olleh",
+      "feedbackOnFail": "reverse_string(\"hello\") should return \"olleh\""
+    },
+    {
+      "kind": "call",
+      "fn": "reverse_string",
+      "args": ["Python"],
+      "expected": "nohtyP",
+      "feedbackOnFail": "reverse_string(\"Python\") should return \"nohtyP\""
+    }
+  ],
+  "hints": [
+    "Python strings support step slicing with `[start:stop:step]`.",
+    "A negative step like `[::-1]` traverses the string backwards from the last character to the first: `return text[::-1]`"
+  ],
+  "xp": 30,
+  "tags": [
+    "strings",
+    "slicing",
+    "basics"
+  ],
+  "additionalChecks": [
+    {
+      "kind": "call",
+      "fn": "reverse_string",
+      "args": [""],
+      "expected": "",
+      "feedbackOnFail": "reverse_string on an empty string should return an empty string"
+    },
+    {
+      "kind": "call",
+      "fn": "reverse_string",
+      "args": ["racecar"],
+      "expected": "racecar",
+      "feedbackOnFail": "reverse_string(\"racecar\") should return the palindrome \"racecar\""
+    },
+    {
+      "kind": "call",
+      "fn": "reverse_string",
+      "args": ["1 2 3"],
+      "expected": "3 2 1",
+      "feedbackOnFail": "Spaces and numbers should be preserved in reverse order"
+    }
+  ],
+  "referenceSolution": "def reverse_string(text):\n    return text[::-1]\n"
+}

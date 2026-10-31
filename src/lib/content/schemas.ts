@@ -19,6 +19,7 @@ export const TestCaseCallSchema = z.object({
   args: z.array(z.unknown()),
   expected: z.unknown(),
   compare: z.enum(["equal", "approx"]).default("equal"),
+  tolerance: z.number().positive().optional().default(0.0001),
   feedbackOnFail: z.string().optional(),
 });
 

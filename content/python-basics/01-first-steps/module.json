@@ -10,6 +10,13 @@
     "03-basic-arithmetic.lesson.json"
   ],
   "challenges": [
-    "challenges/sum-two-numbers.challenge.json"
+    "challenges/sum-two-numbers.challenge.json",
+    "challenges/celsius-to-fahrenheit.challenge.json",
+    "challenges/is-even.challenge.json",
+    "challenges/reverse-string.challenge.json",
+    "challenges/count-vowels.challenge.json",
+    "challenges/find-maximum.challenge.json",
+    "challenges/calculate-average.challenge.json",
+    "challenges/fizz-buzz-item.challenge.json"
   ]
 }

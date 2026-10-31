@@ -147,6 +147,36 @@ function runContentValidation(): void {
                 `Challenge '${challenge.id}' with difficulty '${challenge.difficulty}' has XP = ${challenge.xp}. Expected ${expectedXP} XP.`
               );
             }
+
+            // Phase 5: Challenge completeness rules
+            if (!challenge.referenceSolution || !challenge.referenceSolution.trim()) {
+              ctx.errors.push(`Challenge '${challenge.id}' is missing a required referenceSolution.`);
+            }
+
+            if (challenge.examples.length < 2) {
+              ctx.errors.push(`Challenge '${challenge.id}' must provide at least 2 illustrated examples.`);
+            }
+
+            if (challenge.visibleTests.length < 2) {
+              ctx.errors.push(`Challenge '${challenge.id}' must have at least 2 visible test cases.`);
+            }
+
+            if (challenge.additionalChecks.length < 2) {
+              ctx.errors.push(`Challenge '${challenge.id}' must have at least 2 additional check test cases.`);
+            }
+
+            const allChallengeTests = [...challenge.visibleTests, ...challenge.additionalChecks];
+            allChallengeTests.forEach((t, tIdx) => {
+              if (!t.feedbackOnFail || !t.feedbackOnFail.trim()) {
+                ctx.errors.push(`Challenge '${challenge.id}' test case #${tIdx + 1} is missing feedbackOnFail.`);
+              }
+              if (t.kind === "call" && t.compare === "approx") {
+                const isNumeric = typeof t.expected === "number" || (Array.isArray(t.expected) && t.expected.every(v => typeof v === "number"));
+                if (!isNumeric) {
+                  ctx.errors.push(`Challenge '${challenge.id}' test case #${tIdx + 1} has compare='approx' but non-numeric expected value.`);
+                }
+              }
+            });
           } catch (err: unknown) {
             ctx.errors.push(`Invalid challenge at ${challengePath}: ${(err as Error).message}`);
           }

@@ -1,0 +1,71 @@
+{
+  "id": "challenge.python-basics.celsius-to-fahrenheit",
+  "slug": "celsius-to-fahrenheit",
+  "title": "Celsius to Fahrenheit",
+  "difficulty": "easy",
+  "statement": "Write a function named `celsius_to_fahrenheit(c)` that takes a temperature in degrees Celsius `c` and converts it to Fahrenheit.\n\nThe conversion formula is:\n$$\\text{Fahrenheit} = (\\text{Celsius} \\times \\frac{9}{5}) + 32$$\n\n### Examples\n- `celsius_to_fahrenheit(0)` returns `32.0`\n- `celsius_to_fahrenheit(100)` returns `212.0`\n- `celsius_to_fahrenheit(37)` returns `98.6`",
+  "examples": [
+    {
+      "input": "celsius_to_fahrenheit(0)",
+      "output": "32.0",
+      "explanation": "Freezing point of water: (0 * 9/5) + 32 = 32.0"
+    },
+    {
+      "input": "celsius_to_fahrenheit(100)",
+      "output": "212.0",
+      "explanation": "Boiling point of water: (100 * 9/5) + 32 = 212.0"
+    }
+  ],
+  "starterCode": "def celsius_to_fahrenheit(c):\n    # Convert Celsius temperature c to Fahrenheit\n    pass\n",
+  "visibleTests": [
+    {
+      "kind": "call",
+      "fn": "celsius_to_fahrenheit",
+      "args": [0],
+      "expected": 32.0,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "celsius_to_fahrenheit(0) should return 32.0"
+    },
+    {
+      "kind": "call",
+      "fn": "celsius_to_fahrenheit",
+      "args": [100],
+      "expected": 212.0,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "celsius_to_fahrenheit(100) should return 212.0"
+    }
+  ],
+  "hints": [
+    "Multiply the input `c` by 9/5 (or 1.8), then add 32.",
+    "Make sure to use the `return` statement to send back the calculated float value: `return (c * 9/5) + 32`"
+  ],
+  "xp": 30,
+  "tags": [
+    "math",
+    "floats",
+    "functions"
+  ],
+  "additionalChecks": [
+    {
+      "kind": "call",
+      "fn": "celsius_to_fahrenheit",
+      "args": [-40],
+      "expected": -40.0,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "-40 degrees Celsius should convert to -40.0 Fahrenheit (the intersection point)"
+    },
+    {
+      "kind": "call",
+      "fn": "celsius_to_fahrenheit",
+      "args": [37],
+      "expected": 98.6,
+      "compare": "approx",
+      "tolerance": 0.0001,
+      "feedbackOnFail": "Body temperature 37 Celsius should convert to 98.6 Fahrenheit"
+    }
+  ],
+  "referenceSolution": "def celsius_to_fahrenheit(c):\n    return (c * 9 / 5) + 32\n"
+}

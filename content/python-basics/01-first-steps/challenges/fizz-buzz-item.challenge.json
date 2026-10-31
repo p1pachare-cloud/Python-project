@@ -1,0 +1,78 @@
+{
+  "id": "challenge.python-basics.fizz-buzz-item",
+  "slug": "fizz-buzz-item",
+  "title": "FizzBuzz Item",
+  "difficulty": "medium",
+  "statement": "Write a function named `fizz_buzz(n)` that takes a positive integer `n` and returns a string according to the classic FizzBuzz rules:\n\n- Return `\"FizzBuzz\"` if `n` is divisible by both 3 and 5.\n- Return `\"Fizz\"` if `n` is divisible by 3 (and not 5).\n- Return `\"Buzz\"` if `n` is divisible by 5 (and not 3).\n- Otherwise, return `n` converted to a string (e.g. `\"7\"`).\n\n### Examples\n- `fizz_buzz(3)` returns `\"Fizz\"`\n- `fizz_buzz(5)` returns `\"Buzz\"`\n- `fizz_buzz(15)` returns `\"FizzBuzz\"`\n- `fizz_buzz(7)` returns `\"7\"`",
+  "examples": [
+    {
+      "input": "fizz_buzz(3)",
+      "output": "\"Fizz\"",
+      "explanation": "3 is divisible by 3"
+    },
+    {
+      "input": "fizz_buzz(15)",
+      "output": "\"FizzBuzz\"",
+      "explanation": "15 is divisible by both 3 and 5"
+    }
+  ],
+  "starterCode": "def fizz_buzz(n):\n    # Return 'FizzBuzz', 'Fizz', 'Buzz', or str(n)\n    pass\n",
+  "visibleTests": [
+    {
+      "kind": "call",
+      "fn": "fizz_buzz",
+      "args": [3],
+      "expected": "Fizz",
+      "feedbackOnFail": "fizz_buzz(3) should return \"Fizz\""
+    },
+    {
+      "kind": "call",
+      "fn": "fizz_buzz",
+      "args": [5],
+      "expected": "Buzz",
+      "feedbackOnFail": "fizz_buzz(5) should return \"Buzz\""
+    },
+    {
+      "kind": "call",
+      "fn": "fizz_buzz",
+      "args": [15],
+      "expected": "FizzBuzz",
+      "feedbackOnFail": "fizz_buzz(15) should return \"FizzBuzz\""
+    }
+  ],
+  "hints": [
+    "Check the most specific condition first: if `n % 3 == 0 and n % 5 == 0`, return `\"FizzBuzz\"`.",
+    "Use `elif` to check for `n % 3 == 0` (`\"Fizz\"`) and `n % 5 == 0` (`\"Buzz\"`).",
+    "In the `else` branch, convert the integer to a string using `str(n)`."
+  ],
+  "xp": 60,
+  "tags": [
+    "conditionals",
+    "math",
+    "algorithms"
+  ],
+  "additionalChecks": [
+    {
+      "kind": "call",
+      "fn": "fizz_buzz",
+      "args": [7],
+      "expected": "7",
+      "feedbackOnFail": "fizz_buzz(7) should return string \"7\""
+    },
+    {
+      "kind": "call",
+      "fn": "fizz_buzz",
+      "args": [30],
+      "expected": "FizzBuzz",
+      "feedbackOnFail": "fizz_buzz(30) should return \"FizzBuzz\""
+    },
+    {
+      "kind": "call",
+      "fn": "fizz_buzz",
+      "args": [1],
+      "expected": "1",
+      "feedbackOnFail": "fizz_buzz(1) should return string \"1\""
+    }
+  ],
+  "referenceSolution": "def fizz_buzz(n):\n    if n % 3 == 0 and n % 5 == 0:\n        return \"FizzBuzz\"\n    elif n % 3 == 0:\n        return \"Fizz\"\n    elif n % 5 == 0:\n        return \"Buzz\"\n    else:\n        return str(n)\n"
+}

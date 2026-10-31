@@ -1,0 +1,70 @@
+{
+  "id": "challenge.python-basics.count-vowels",
+  "slug": "count-vowels",
+  "title": "Count the Vowels",
+  "difficulty": "easy",
+  "statement": "Write a function named `count_vowels(text)` that counts and returns the total number of English vowels (`a`, `e`, `i`, `o`, `u`) in a given string `text`.\n\nThe count must be case-insensitive (both `'A'` and `'a'` count as vowels).\n\n### Examples\n- `count_vowels(\"hello\")` returns `2`\n- `count_vowels(\"PyQuest\")` returns `2`\n- `count_vowels(\"rhythm\")` returns `0`",
+  "examples": [
+    {
+      "input": "count_vowels(\"hello\")",
+      "output": "2",
+      "explanation": "Contains 2 vowels: 'e' and 'o'"
+    },
+    {
+      "input": "count_vowels(\"PyQuest\")",
+      "output": "2",
+      "explanation": "Contains 2 vowels: 'u' and 'e'"
+    }
+  ],
+  "starterCode": "def count_vowels(text):\n    # Return the count of vowels (a, e, i, o, u) in text\n    pass\n",
+  "visibleTests": [
+    {
+      "kind": "call",
+      "fn": "count_vowels",
+      "args": ["hello"],
+      "expected": 2,
+      "feedbackOnFail": "count_vowels(\"hello\") should return 2"
+    },
+    {
+      "kind": "call",
+      "fn": "count_vowels",
+      "args": ["PyQuest"],
+      "expected": 2,
+      "feedbackOnFail": "count_vowels(\"PyQuest\") should return 2"
+    }
+  ],
+  "hints": [
+    "Define a string of vowels: `vowels = \"aeiou\"` and convert the input string to lowercase using `.lower()`.",
+    "Iterate through each character using a `for` loop and increment a counter variable whenever a character is found in `vowels`."
+  ],
+  "xp": 30,
+  "tags": [
+    "strings",
+    "loops",
+    "counting"
+  ],
+  "additionalChecks": [
+    {
+      "kind": "call",
+      "fn": "count_vowels",
+      "args": ["rhythm"],
+      "expected": 0,
+      "feedbackOnFail": "count_vowels(\"rhythm\") should return 0 (y is not counted as a vowel)"
+    },
+    {
+      "kind": "call",
+      "fn": "count_vowels",
+      "args": ["AEIOU"],
+      "expected": 5,
+      "feedbackOnFail": "count_vowels(\"AEIOU\") should handle uppercase vowels and return 5"
+    },
+    {
+      "kind": "call",
+      "fn": "count_vowels",
+      "args": [""],
+      "expected": 0,
+      "feedbackOnFail": "count_vowels(\"\") on an empty string should return 0"
+    }
+  ],
+  "referenceSolution": "def count_vowels(text):\n    count = 0\n    for char in text.lower():\n        if char in \"aeiou\":\n            count += 1\n    return count\n"
+}

@@ -118,4 +118,24 @@ describe("Execution Protocol & Stale-Result Protection", () => {
     const passed = JSON.stringify(actual) === JSON.stringify(testCase.expected);
     assert.equal(passed, true);
   });
+
+  test("enriches TestResultItem with callSignature and type mismatch diagnostics", () => {
+    const item: import("../src/lib/execution/pyodideRunner.ts").TestResultItem = {
+      name: "Test 1: is_even(4)",
+      kind: "call",
+      callSignature: "is_even(4)",
+      passed: false,
+      expected: true,
+      actual: null,
+      expectedType: "bool",
+      actualType: "None",
+      isTypeMismatch: true,
+      diagnosticHint: "Your function returned None. Did you forget a 'return' statement, or use 'print()' instead of 'return'?",
+      feedbackOnFail: "is_even(4) should return True",
+    };
+
+    assert.equal(item.callSignature, "is_even(4)");
+    assert.equal(item.isTypeMismatch, true);
+    assert.match(item.diagnosticHint || "", /returned None/);
+  });
 });

@@ -272,31 +272,68 @@ export function CodeEditor({
                   </span>
                 </div>
 
-                <div className="space-y-2">
+                <div className="space-y-2.5">
                   {executionResult.testResults.map((t, idx) => (
                     <div
                       key={idx}
-                      className={`rounded-[var(--radius-sm)] border p-2.5 text-xs font-mono flex flex-col gap-1 ${
+                      className={`rounded-[var(--radius-sm)] border p-3 text-xs font-mono flex flex-col gap-1.5 ${
                         t.passed
-                          ? "border-emerald-200 bg-emerald-50 text-emerald-950"
-                          : "border-rose-200 bg-rose-50 text-rose-950"
+                          ? "border-emerald-300 bg-emerald-50 text-emerald-950"
+                          : "border-rose-300 bg-rose-50 text-rose-950"
                       }`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="font-bold">
-                          {t.passed ? "✓ PASS:" : "✗ FAIL:"} {t.name}
+                        <span className="font-bold flex items-center gap-1.5">
+                          <span>{t.passed ? "✓ PASS:" : "✗ FAIL:"}</span>
+                          <span>{t.name}</span>
                         </span>
-                        <span className="text-[11px] font-semibold uppercase">
+                        <span
+                          className={`text-[10px] font-bold uppercase tracking-wider px-2 py-0.5 rounded ${
+                            t.passed
+                              ? "bg-emerald-200/70 text-emerald-900"
+                              : "bg-rose-200/70 text-rose-900"
+                          }`}
+                        >
                           {t.passed ? "Passed" : "Failed"}
                         </span>
                       </div>
+
                       {!t.passed && (
-                        <div className="text-[11px] text-rose-800 mt-1 pl-3 border-l-2 border-rose-300">
-                          {t.feedbackOnFail && (
-                            <p className="font-sans font-medium mb-1">{t.feedbackOnFail}</p>
+                        <div className="text-[11px] text-rose-900 mt-1 pl-3 border-l-2 border-rose-400 space-y-1.5">
+                          {t.diagnosticHint && (
+                            <div className="font-sans font-medium text-rose-900 bg-rose-100/80 p-2 rounded border border-rose-200">
+                              💡 {t.diagnosticHint}
+                            </div>
                           )}
-                          <p>Expected: {JSON.stringify(t.expected)}</p>
-                          <p>Received: {JSON.stringify(t.actual)}</p>
+                          {t.feedbackOnFail && (
+                            <p className="font-sans font-semibold text-rose-950">
+                              {t.feedbackOnFail}
+                            </p>
+                          )}
+                          <div className="bg-white/80 p-2 rounded border border-rose-200 font-mono text-[11px] space-y-0.5">
+                            <div>
+                              <span className="text-[var(--stone-500)] font-sans">Expected: </span>
+                              <span className="font-bold text-emerald-800">
+                                {JSON.stringify(t.expected)}
+                              </span>
+                              {t.expectedType && (
+                                <span className="text-[10px] text-[var(--stone-500)] ml-1 font-sans">
+                                  ({t.expectedType})
+                                </span>
+                              )}
+                            </div>
+                            <div>
+                              <span className="text-[var(--stone-500)] font-sans">Received: </span>
+                              <span className="font-bold text-rose-800">
+                                {typeof t.actual === "object" ? JSON.stringify(t.actual) : String(t.actual)}
+                              </span>
+                              {t.actualType && (
+                                <span className="text-[10px] text-[var(--stone-500)] ml-1 font-sans">
+                                  ({t.actualType})
+                                </span>
+                              )}
+                            </div>
+                          </div>
                         </div>
                       )}
                     </div>

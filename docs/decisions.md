@@ -88,6 +88,20 @@ All architecture decision records in this project are subject to lifecycle manag
 
 ---
 
+### ADR-005: Answer Checker Evaluation & Reference Solution Verification
+- **Status:** ACCEPTED
+- **Date:** 2026-10-31
+- **Context:** Challenges in Python involve numerical calculations (float drift like 0.1 + 0.2), multi-argument calls, and edge cases. In addition, student frustration is heightened by unhelpful `None` or silent failures, and curriculum shipping risks include broken test cases or missing reference solutions.
+- **Decision:**
+  1. Implement approximate float comparisons (`compare: "approx"`) with default tolerance `1e-4` in both client Pyodide Worker and evaluation utilities.
+  2. Implement automated reference solution verification in CI (`scripts/verify-reference-solutions.ts`) testing 100% of challenge solutions against all visible and hidden checks using native Python before committing.
+  3. Enrich test results with Python type introspection (`int`, `float`, `str`, `list`, `dict`, `bool`, `None`) and diagnostic messages distinguishing printing vs. returning.
+  4. Reinforce that all in-browser checks are strictly Tier A untrusted practice checks, not proof of code correctness.
+- **Rationale:** Prevents precision traps in floating-point math, ensures zero broken challenge test cases ship to production, and provides immediate, encouraging feedback to learners.
+- **Consequences:** All new challenges authored must include non-empty `referenceSolution`, minimum 2 visible tests, minimum 2 additional checks, and pass `npm run verify:solutions`.
+
+---
+
 ## 3. Decisions Register (D1 – D17)
 
 | ID | Topic | Status | Decision Summary / Current Baseline | Target Phase |

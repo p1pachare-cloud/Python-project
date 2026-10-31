@@ -7,9 +7,14 @@ import { type TestCase } from "../content/schemas.ts";
 export interface TestResultItem {
   name: string;
   kind: "stdout" | "call";
+  callSignature?: string;
   passed: boolean;
   expected: unknown;
   actual: unknown;
+  expectedType?: string;
+  actualType?: string;
+  isTypeMismatch?: boolean;
+  diagnosticHint?: string;
   feedbackOnFail?: string;
 }
 
