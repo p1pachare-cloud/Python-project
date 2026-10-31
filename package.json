@@ -10,10 +10,12 @@
     "typecheck": "tsc --noEmit",
     "content:check": "node --no-warnings --experimental-strip-types scripts/validate-content.ts",
     "verify:solutions": "node --no-warnings --experimental-strip-types scripts/verify-reference-solutions.ts",
-    "test": "node --no-warnings --test --experimental-strip-types tests/content-validation.test.ts tests/execution-runner.test.ts tests/challenge-evaluator.test.ts"
+    "test": "node --no-warnings --test --experimental-strip-types tests/content-validation.test.ts tests/execution-runner.test.ts tests/challenge-evaluator.test.ts tests/env-validation.test.ts"
   },
   "dependencies": {
     "@monaco-editor/react": "^4.7.0",
+    "@supabase/ssr": "^0.12.7",
+    "@supabase/supabase-js": "^2.118.0",
     "next": "16.4.3",
     "react": "19.3.0",
     "react-dom": "19.3.0",

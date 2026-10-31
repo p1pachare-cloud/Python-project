@@ -102,6 +102,21 @@ All architecture decision records in this project are subject to lifecycle manag
 
 ---
 
+### ADR-006: Supabase Baseline Integration & Public Environment Isolation (Phase 6A)
+- **Status:** ACCEPTED (Phase 6A Scope)
+- **Date:** 2026-10-31
+- **Context:** PyQuest requires database infrastructure for user profiles and progress tracking while maintaining zero leakage of server secrets to the client. Public cloud registration for minors remains blocked pending Decision D1, and remote infrastructure is deferred pending Decision D10.
+- **Decision:**
+  1. Install `@supabase/supabase-js` and `@supabase/ssr` as core client dependencies.
+  2. Isolate public environment configuration in `src/lib/supabase/env.ts` with Zod schema validation for `NEXT_PUBLIC_SUPABASE_URL`, `NEXT_PUBLIC_SUPABASE_ANON_KEY`, and `NEXT_PUBLIC_APP_URL`.
+  3. Strictly prohibit `SUPABASE_SERVICE_ROLE_KEY` from client and public configuration.
+  4. Defer active browser and server client instantiation, database migrations, and authentication routes to subsequent approved phases.
+  5. Decision D1 (minor account model) and Decision D10 (remote hosting region) remain strictly PENDING.
+- **Rationale:** Ensures clean dependency integration and strict environment isolation before introducing database schemas or route guards.
+- **Consequences:** Client and server environments have a validated contract for Supabase public configuration without premature cloud provisioning or minor account risks.
+
+---
+
 ## 3. Decisions Register (D1 – D17)
 
 | ID | Topic | Status | Decision Summary / Current Baseline | Target Phase |
