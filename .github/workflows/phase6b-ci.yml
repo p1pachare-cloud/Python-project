@@ -1,0 +1,74 @@
+name: Phase 6B CI & Database Verification
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+jobs:
+  quality-gates:
+    name: Host Quality Gates
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js v24
+        uses: actions/setup-node@v4
+        with:
+          node-version: 24
+          cache: "npm"
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: Verify Content Schemas
+        run: npm run content:check
+
+      - name: Verify Reference Solutions (Native Python Checks)
+        run: npm run verify:solutions
+
+      - name: TypeScript Typecheck
+        run: npm run typecheck
+
+      - name: ESLint Check
+        run: npm run lint
+
+      - name: Unit Tests
+        run: npm test
+
+      - name: Production Build
+        run: npm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54321
+          NEXT_PUBLIC_SUPABASE_ANON_KEY: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.e30.dummy
+          NEXT_PUBLIC_APP_URL: http://localhost:3000
+
+  database-rls:
+    name: PostgreSQL & RLS Integration Tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Setup Supabase CLI
+        uses: supabase/setup-cli@v1
+        with:
+          version: latest
+
+      - name: Start Supabase Stack
+        run: |
+          supabase init
+          supabase start -x realtime,storage-api,imgproxy,edge-runtime
+
+      - name: Reset Database and Apply Migrations
+        run: supabase db reset
+
+      - name: Execute SQL Integration Tests
+        run: |
+          PGPASSWORD=postgres psql -h 127.0.0.1 -p 54322 -U postgres -d postgres -v ON_ERROR_STOP=1 -f tests/db/rls_integration.sql
+
+      - name: Teardown Supabase Stack
+        if: always()
+        run: supabase stop

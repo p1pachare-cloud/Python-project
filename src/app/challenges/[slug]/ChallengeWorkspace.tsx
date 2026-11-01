@@ -6,6 +6,11 @@ import { type Challenge } from "@/lib/content/schemas";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { CodeEditor } from "@/components/editor/CodeEditor";
+import {
+  getGuestChallengeDraft,
+  saveGuestChallengeDraft,
+  recordGuestChallengeCompletion,
+} from "@/lib/guest/storage";
 
 export interface ChallengeWorkspaceProps {
   challenge: Challenge;
@@ -19,6 +24,9 @@ export function ChallengeWorkspace({
 }: ChallengeWorkspaceProps) {
   const [revealedHints, setRevealedHints] = useState<number>(0);
   const [challengePassed, setChallengePassed] = useState<boolean>(false);
+  const [activeDraft, setActiveDraft] = useState<string>(() => {
+    return getGuestChallengeDraft(challenge.id) ?? challenge.starterCode;
+  });
 
   const handleRevealHint = () => {
     if (revealedHints < challenge.hints.length) {
@@ -159,11 +167,19 @@ export function ChallengeWorkspace({
         {/* Right Column: Code Editor & Runner */}
         <div className="lg:col-span-7 space-y-4">
           <CodeEditor
-            initialCode={challenge.starterCode}
+            key={`${challenge.id}-${activeDraft.length}`}
+            initialCode={activeDraft}
             tests={allTests}
             title={`Challenge: ${challenge.title}`}
+            onCodeChange={(newCode) => {
+              setActiveDraft(newCode);
+              saveGuestChallengeDraft(challenge.id, newCode);
+            }}
             onRunComplete={(allPassed) => {
               setChallengePassed(allPassed);
+              if (allPassed) {
+                recordGuestChallengeCompletion(challenge.id, challenge.xp);
+              }
             }}
           />
 
