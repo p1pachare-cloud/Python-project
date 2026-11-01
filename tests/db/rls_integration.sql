@@ -16,7 +16,10 @@ CREATE TABLE pg_temp.test_results (
 );
 
 CREATE OR REPLACE PROCEDURE pg_temp.record_test(p_id TEXT, p_desc TEXT, p_status TEXT, p_details TEXT DEFAULT NULL)
-LANGUAGE plpgsql AS $$
+LANGUAGE plpgsql
+SECURITY DEFINER
+SET search_path = pg_temp, pg_catalog
+AS $$
 BEGIN
     INSERT INTO pg_temp.test_results (test_id, description, status, details)
     VALUES (p_id, p_desc, p_status, p_details);
@@ -231,14 +234,15 @@ BEGIN
     PERFORM set_config('role', 'authenticated', true);
 
     SELECT count(*) INTO cnt FROM public.profiles WHERE id = u_a;
+
+    RESET role;
+    RESET request.jwt.claim.sub;
+
     IF cnt = 1 THEN
         CALL pg_temp.record_test('TEST-08', 'RLS: User A selects own profile', 'PASS');
     ELSE
         CALL pg_temp.record_test('TEST-08', 'RLS: User A selects own profile', 'FAIL', 'Count: ' || cnt);
     END IF;
-
-    RESET role;
-    RESET request.jwt.claim.sub;
 EXCEPTION WHEN OTHERS THEN
     RESET role;
     RESET request.jwt.claim.sub;
@@ -258,14 +262,15 @@ BEGIN
     PERFORM set_config('role', 'authenticated', true);
 
     SELECT count(*) INTO cnt FROM public.profiles WHERE id = u_b;
+
+    RESET role;
+    RESET request.jwt.claim.sub;
+
     IF cnt = 0 THEN
         CALL pg_temp.record_test('TEST-09', 'RLS: User A cannot select User B profile', 'PASS');
     ELSE
         CALL pg_temp.record_test('TEST-09', 'RLS: User A cannot select User B profile', 'FAIL', 'Leaked rows: ' || cnt);
     END IF;
-
-    RESET role;
-    RESET request.jwt.claim.sub;
 EXCEPTION WHEN OTHERS THEN
     RESET role;
     RESET request.jwt.claim.sub;
@@ -286,14 +291,15 @@ BEGIN
     UPDATE public.profiles SET display_name = 'UserA_Updated' WHERE id = u_a;
     
     SELECT count(*) INTO cnt FROM public.profiles WHERE id = u_a AND display_name = 'UserA_Updated';
+
+    RESET role;
+    RESET request.jwt.claim.sub;
+
     IF cnt = 1 THEN
         CALL pg_temp.record_test('TEST-10', 'RLS: User A updates own display_name', 'PASS');
     ELSE
         CALL pg_temp.record_test('TEST-10', 'RLS: User A updates own display_name', 'FAIL', 'Update failed');
     END IF;
-
-    RESET role;
-    RESET request.jwt.claim.sub;
 EXCEPTION WHEN OTHERS THEN
     RESET role;
     RESET request.jwt.claim.sub;
@@ -307,19 +313,22 @@ DO $$
 DECLARE
     u_a UUID := 'aaaaaaaa-aaaa-aaaa-aaaa-aaaaaaaaaaaa'::uuid;
     u_b UUID := 'bbbbbbbb-bbbb-bbbb-bbbb-bbbbbbbbbbbb'::uuid;
+    is_blocked BOOLEAN;
 BEGIN
     PERFORM set_config('request.jwt.claim.sub', u_a::text, true);
     PERFORM set_config('role', 'authenticated', true);
 
     UPDATE public.profiles SET display_name = 'UserB_Hacked' WHERE id = u_b;
-    IF NOT FOUND THEN
+    is_blocked := NOT FOUND;
+
+    RESET role;
+    RESET request.jwt.claim.sub;
+
+    IF is_blocked THEN
         CALL pg_temp.record_test('TEST-11', 'RLS: User A cannot update User B profile', 'PASS');
     ELSE
         CALL pg_temp.record_test('TEST-11', 'RLS: User A cannot update User B profile', 'FAIL', 'Cross-user update affected row');
     END IF;
-
-    RESET role;
-    RESET request.jwt.claim.sub;
 EXCEPTION WHEN OTHERS THEN
     RESET role;
     RESET request.jwt.claim.sub;
